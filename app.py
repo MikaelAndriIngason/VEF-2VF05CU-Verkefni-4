@@ -1,7 +1,13 @@
-# coding=UTF-8
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-import urllib.request, json
+import os
+from os import environ as env
+from sys import argv
+
+import bottle
 from bottle import route, run, template
+import urllib.request, json
 
 with urllib.request.urlopen("http://apis.is/currency/") as url:
     apidata = json.loads(url.read().decode())
@@ -21,5 +27,4 @@ def verk4_1():
 def verk4_2():
     return template('table', data=apidata)
 
-if __name__ == "__main__":
-    run(debug=True)
+bottle.run(host='0.0.0.0', port=argv[1])
